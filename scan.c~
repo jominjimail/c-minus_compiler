@@ -107,10 +107,10 @@ TokenType getToken(void)
      { case START:
          if (isdigit(c)) state = INNUM;
          else if (isalpha(c)) state = INID;
+
          else if (c == '\t') save = FALSE;
          else if (c == ' ') save = FALSE;
          else if (c == '\n') save = FALSE;
-         else if (c == '\r') save = FALSE;
 
          else if (c == '<') state = INLT;
          else if (c == '>') state = INGT;

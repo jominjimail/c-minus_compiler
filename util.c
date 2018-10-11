@@ -9,7 +9,7 @@
 #include "globals.h"
 #include "util.h"
 
-/* Procedure printToken prints a token 
+/* Procedure printToken prints a token
  * and its lexeme to the listing file
  */
 void printToken( TokenType token, const char* tokenString )
@@ -17,20 +17,44 @@ void printToken( TokenType token, const char* tokenString )
   { case IF:
     case THEN:
     case ELSE:
+    case WHILE:
+    case RETURN:
+    case INT:
+    case VOID:
+
     case END:
     case REPEAT:
     case UNTIL:
     case READ:
     case WRITE:
+
       fprintf(listing,
          "reserved word: %s\n",tokenString);
       break;
-    case ASSIGN: fprintf(listing,":=\n"); break;
+//    case ASSIGN: fprintf(listing,":=\n"); break;
+    case ASSIGN:fprintf(listing,"=\n"); break;
+    case EQ: fprintf(listing, "==\n"); break;
+    case NEQ: fprintf(listing, "!=\n" ); break;
+
     case LT: fprintf(listing,"<\n"); break;
-    case EQ: fprintf(listing,"=\n"); break;
+
+//    case EQ: fprintf(listing,"=\n"); break;
+    case LE: fprintf(listing, "<=\n" ); break;
+    case GT: fprintf(listing, ">\n" ); break;
+    case GE: fprintf(listing, ">=\n" ); break;
+
     case LPAREN: fprintf(listing,"(\n"); break;
     case RPAREN: fprintf(listing,")\n"); break;
+
+    case LBRACE: fprintf(listing, "[\n" ); break;
+    case RBRACE: fprintf(listing, "]\n" ); break;
+    case LCURLY: fprintf(listing, "{\n" ); break;
+    case RCURLY: fprintf(listing, "}\n" ); break;
+
     case SEMI: fprintf(listing,";\n"); break;
+
+    case COMMA: fprintf(listing, ",\n" ); break;
+
     case PLUS: fprintf(listing,"+\n"); break;
     case MINUS: fprintf(listing,"-\n"); break;
     case TIMES: fprintf(listing,"*\n"); break;
@@ -46,7 +70,7 @@ void printToken( TokenType token, const char* tokenString )
       break;
     case ERROR:
       fprintf(listing,
-          "ERROR: %s\n",tokenString);
+          "ERRORdfdf: %s\n",tokenString);
       break;
     default: /* should never happen */
       fprintf(listing,"Unknown token: %d\n",token);
@@ -71,7 +95,7 @@ TreeNode * newStmtNode(StmtKind kind)
   return t;
 }
 
-/* Function newExpNode creates a new expression 
+/* Function newExpNode creates a new expression
  * node for syntax tree construction
  */
 TreeNode * newExpNode(ExpKind kind)
@@ -121,7 +145,7 @@ static void printSpaces(void)
     fprintf(listing," ");
 }
 
-/* procedure printTree prints a syntax tree to the 
+/* procedure printTree prints a syntax tree to the
  * listing file using indentation to indicate subtrees
  */
 void printTree( TreeNode * tree )
